@@ -17,7 +17,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-
 public class StatusSocketUtils {
 
     public static Integer sendCommand(String host, int port, String command) {
