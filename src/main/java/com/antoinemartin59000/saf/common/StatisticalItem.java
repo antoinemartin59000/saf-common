@@ -16,9 +16,17 @@ public class StatisticalItem {
     private final String name;
     private long hits = 0;
     private long average = 0;
+    private long max = 0;
 
     public StatisticalItem(String name) {
         this.name = name;
+    }
+
+    public void reset() {
+        this.hits = 0;
+        this.average = 0;
+        this.max = 0;
+        this.children.values().forEach(StatisticalItem::reset);
     }
 
     public Map<String, StatisticalItem> getChildren() {
@@ -41,6 +49,9 @@ public class StatisticalItem {
         long time = System.currentTimeMillis() - startMilliseconds;
         average = ((average * hits) + time) / (hits + 1);
         hits++;
+        if (time > max) {
+            max = time;
+        }
     }
 
     public String getName() {
@@ -55,4 +66,7 @@ public class StatisticalItem {
         return average;
     }
 
+    public long getMax() {
+        return max;
+    }
 }
