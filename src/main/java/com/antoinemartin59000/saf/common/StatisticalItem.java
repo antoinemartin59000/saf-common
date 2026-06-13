@@ -11,6 +11,10 @@ public class StatisticalItem {
         return ROOT;
     }
 
+    public static long getTime() {
+        return System.nanoTime();
+    }
+
     private Map<String, StatisticalItem> children = new HashMap<>();
 
     private final String name;
@@ -45,8 +49,8 @@ public class StatisticalItem {
     }
 
     // let's not bother with synchronisation as not sensitive data
-    public void addTime(long startMilliseconds) {
-        long time = System.currentTimeMillis() - startMilliseconds;
+    public void addTime(long startNanoseconds) {
+        long time = System.nanoTime() - startNanoseconds;
         average = ((average * hits) + time) / (hits + 1);
         hits++;
         if (time > max) {
